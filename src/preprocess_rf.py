@@ -130,6 +130,10 @@ cols_to_drop = ['unified_id', 'month', 'revenue', 'occupancy', 'street_name', 'g
 train_df = train_df.drop(columns=cols_to_drop, errors='ignore')
 test_df = test_df.drop(columns=cols_to_drop, errors='ignore')
 
+# Turn booleans into False=0 and 1=True
+train_df[train_df.select_dtypes('bool').columns] = train_df.select_dtypes('bool').astype(int)
+test_df[test_df.select_dtypes('bool').columns] = test_df.select_dtypes('bool').astype(int)
+
 train_df.to_csv(OUT_DIR / "train_preprocessed.csv", index=False)
 test_df.to_csv(OUT_DIR / "test_preprocessed.csv", index=False)
 

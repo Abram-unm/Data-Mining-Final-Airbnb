@@ -15,6 +15,8 @@ def main():
     
     print("Beginning Random Forest")
     # Find hyperparameters for best Random Forest
+    train_data, train_labels = pre.load_data(os.path.join(args.data_path, "/train_preprocessed.csv"))
+    test_data, test_labels = pre.load_data(os.path.join(args.data_path, "/test_preprocessed.csv"))
     criterion, depth = random_forest_hyperparameters(args.data_path)
     print("Finished Random Forest")
 

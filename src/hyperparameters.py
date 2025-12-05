@@ -1,20 +1,20 @@
 from sklearn.decomposition import PCA
 import numpy as np
-import src.crossValidation as cv
+import crossValidation as cv
 
-def random_forest_hyperparameters(data_path):
+def random_forest_hyperparameters(data, labels):
     """
     Finds the best hyperparameters for Random Forest.
     Args:
-        data_path: path to training data
+        data: numpy array with training data
+        labels: numpy labels with training data
     Returns:
         Best information gain criterion for random forest
         Best max depth for random forest
     """
     criterion_list = ["gini", "entropy", "log_loss"]
-    depth_list = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+    depth_list = [5, 10, 15, 20]
 
-    data, labels = pre.load_training_data_all(data_path)
     print("\tData loaded")
     # PCA dimensionality reduction 
     use_pca = True
@@ -53,11 +53,12 @@ def random_forest_hyperparameters(data_path):
     return pairs[index][0], pairs[index][1]
 
 
-def svm_hyperparameters(data_path):
+def svm_hyperparameters(data, labels):
     """
     Finds the best hyperparameters for Support Vector Machine.
     Args:
-        data_path: path to training data
+        data: numpy array with training data
+        labels: numpy labels with training data
     Returns:
         Best kernel type for svm
         Best kernel coefficient method for svm
@@ -69,7 +70,6 @@ def svm_hyperparameters(data_path):
     tolerance_list = [1e-3, 1e-4, 1e-5, 1e-6, 1e-7, 1e-8, 1e-9]
     iterations_list = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, -1]
 
-    data, labels = pre.load_training_data_all(data_path)
     print("\tData loaded")
     # PCA dimensionality reduction 
     use_pca = True
